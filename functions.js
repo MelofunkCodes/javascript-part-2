@@ -89,46 +89,105 @@
 // console.log("Squared array: \n", aSquared);
 
 
-//EXERCISE 4
-//Function squares the "num" property of an object. Try it on an object, then try it on an array of objects
-function squareNumObject(x) {
-    //create a NEW object of x, with the same properties of OLD object, with the added change of squaring the "num" property
-    var keys = Object.keys(x);
-    var xNew = {};
-    
-    //keys[idx] will evaluate to property name (i.e. fruit, num)
-    // x[keys[idx]] will evaluate to the VALUE attached to that property
-    for (var idx = 0; idx < keys.length; idx++) {
-        //if property in object "x" is equal to "num", assign the squared expression to the value of xNew placeholder
-        if(keys[idx] === "num") {
-            xNew[ keys[idx] ]= x.num*x.num;
-        }
-        //else, for all other properties. Assign value at property of object "x" to that of "xNew"
-        else{
-           xNew[ keys[idx] ]= x[ keys[idx] ];
-        }
-    }
+// //EXERCISE 4
+// //Function squares the "num" property of an object. Try it on an object, then try it on an array of objects
+// function squareNumObject(x) {
+//     //create a NEW object of x, with the same properties of OLD object, with the added change of squaring the "num" property
+//     var keys = Object.keys(x);
+//     var xNew = {};
 
-    return xNew;//this returns a new object
+//     //keys[idx] will evaluate to property name (i.e. fruit, num)
+//     // x[keys[idx]] will evaluate to the VALUE attached to that property
+//     for (var idx = 0; idx < keys.length; idx++) {
+//         //if property in object "x" is equal to "num", assign the squared expression to the value of xNew placeholder
+//         if (keys[idx] === "num") {
+//             xNew[keys[idx]] = x.num * x.num;
+//         }
+//         //else, for all other properties. Assign value at property of object "x" to that of "xNew"
+//         else {
+//             xNew[keys[idx]] = x[keys[idx]];
+//         }
+//     }
+
+//     return xNew; //this returns a new object
+// }
+
+
+// // var someObject = {
+// //     fruit: "celery",
+// //     num: 4
+// // };
+
+// // console.log(squareNumObject(someObject));
+
+
+// var farmInventory = [{
+//     fruit: "cucumber",
+//     num: 2
+// }, {
+//     fruit: "tomato",
+//     num: 30
+// }, {
+//     fruit: "squash",
+//     num: 0
+// }];
+
+// var farmHarvest = farmInventory.map(squareNumObject);
+
+// console.log("\nEXERCISE 4: ");
+// console.log("Farm before harvest: \n", farmInventory);
+// console.log("Farm after harvest: \n", farmHarvest);
+
+//EXERCISE 5
+//creating function that will take string argument and return arithmetic function depending on string 
+function operationMaker(operation) {
+    switch (operation) {
+        case 'add':
+            return function(num1, num2) {
+                return num1 + num2;
+            };
+            break;
+        case 'subtract':
+            return function(num1, num2) {
+                return num1 - num2;
+            };
+            break;
+        case 'mult':
+            return function(num1, num2) {
+                return num1 * num2;
+            };
+            break;
+        case 'div':
+            return function(num1, num2) {
+                return num1 / num2;
+            };
+            break;
+        default:
+            return function(){ 
+                return "Operation not recognized. Try again!";
+            }
+
+    }
 }
 
+var adder = operationMaker("add");
+var sum = adder(5, 10);
 
-// var someObject = {
-//     fruit: "celery",
-//     num: 4
-// };
+var mult = operationMaker("mult");
+var product = mult(5, 10);
 
-// console.log(squareNumObject(someObject));
+var sub = operationMaker("subtract");
+var difference = sub(5, 10);
 
+var div = operationMaker("div");
+var quotient = div(5, 10);
 
-var farmInventory = [
-    {fruit: "cucumber", num: 2},
-    {fruit: "tomato", num: 30},
-    {fruit: "squash", num: 0}
-    ];
+var test = operationMaker("pizzaburger");
+var answer = test(5, 10);
 
-var farmHarvest = farmInventory.map(squareNumObject);
-
-console.log("\nEXERCISE 4: ");
-console.log("Farm before harvest: \n", farmInventory);
-console.log("Farm after harvest: \n", farmHarvest);
+console.log("\nEXERCISE 5: ");
+console.log("Sum: ", sum);
+console.log("Product: ", product);
+console.log("Difference: ", difference);
+console.log("Quotient: ", quotient);
+console.log("Answer: ", answer);
